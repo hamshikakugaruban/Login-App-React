@@ -1,2 +1,2 @@
-import {createHashHistory} from 'history';
-export default createHashHistory()
+import { createHashHistory } from "history";
+export default createHashHistory();

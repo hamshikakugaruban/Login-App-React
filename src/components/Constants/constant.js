@@ -1,2 +1,2 @@
-export  const  TOKEN="token";
-export const AUTHORIZION='authorizion';
+export const TOKEN = "token";
+export const AUTHORIZION = "authorizion";
