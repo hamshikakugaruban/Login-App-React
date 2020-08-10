@@ -1,10 +1,9 @@
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "../register.css"
 
 import { TOKEN, AUTHORIZION } from "./Constants/constant";
 import Histroy from "./Constants/History";
@@ -16,7 +15,6 @@ class Login extends Component {
       password: "",
     },
   };
-  handleClick = () => {};
   handleChange = ({ currentTarget: input }) => {
     const user = { ...this.state.user };
     user[input.name] = input.value;
@@ -43,39 +41,16 @@ class Login extends Component {
   render() {
     return (
       <div className="auth-wrapper">
-        <div className="auth-inner">
+        <div className="col">
           <MuiThemeProvider>
             <div>
               <h3>Login</h3>
-              <TextField
-                hintText="Enter your Email"
-                floatingLabelText="E-mail"
-                id="email"
-                name="email"
-                required
-                autoFocus="true"
-                value={this.state.user.email}
-                onChange={this.handleChange}
-              />
-              <br />
-              <TextField
-                type="password"
-                hintText="Enter your Password"
-                floatingLabelText="Password"
-                id="password"
-                name="password"
-                required
-                autoFocus="true"
-                value={this.state.user.password}
-                onChange={this.handleChange}
-              />
-              <br />
-              <RaisedButton
-                label="Login"
-                primary={true}
-                onClick={this.handleSubmit}
-              />
-              <Link to="/sign-up"> Sign-up</Link>
+              <TextField floatingLabelText="E-mail" id="email" name="email" value={this.state.user.email} onChange={this.handleChange}/><br/>
+              <TextField type="password" floatingLabelText="Password" id="password" name="password" value={this.state.user.password} onChange={this.handleChange}/><br/>
+              <div className = "but">
+                <button type="button" class="btn btn-primary" onClick={this.handleSubmit}> Login </button>
+                <Link to="/sign-up"> Sign-up</Link>
+              </div>
             </div>
           </MuiThemeProvider>
         </div>

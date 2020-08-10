@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { Table, Divider } from "antd";
+import { Table } from "antd";
 import { EditFilled, DeleteOutlined } from "@ant-design/icons";
 import { TOKEN } from "./Constants/constant";
 import Add from "./Add";
@@ -12,8 +11,6 @@ export default class Index extends Component {
     super(props);
     this.state = {
       employees: [],
-      toDashboard: false,
-      isLoading: false,
       url: "https://gowtham-rest-api-crud.herokuapp.com/employees",
       token: localStorage.getItem(TOKEN),
       type: "add",
@@ -70,13 +67,10 @@ export default class Index extends Component {
       .then((res) => {
         this.setState({});
         this.getAllEmployee();
-        console.log("Successfuly deleted");
-        alert("Succesfuly deleted");
       });
   };
 
   render() {
-    const { id } = this.state;
     const columns = [
       {
         title: "Name",
@@ -103,8 +97,8 @@ export default class Index extends Component {
         key: "action",
         render: (record) => (
           <span>
-            <EditFilled onClick={this.editEmploee.bind(this, record)} />
-            <Divider type="vertical" />
+            <EditFilled onClick={this.editEmploee.bind(this, record)} /> 
+            &nbsp;&nbsp;
             <DeleteOutlined onClick={this.delete.bind(this, record.id)} />
           </span>
         ),
@@ -129,18 +123,13 @@ export default class Index extends Component {
                 </li>
               </ol>
               <div>
-                <div className="navbar-brand">
-                  <i className="fas fa-table"></i>
                   &nbsp;&nbsp;Employees List
-                </div>
-                <div className="card-body">
                   <Table columns={columns} dataSource={employees} />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+         </div>
     );
   }
 }

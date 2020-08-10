@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../App.css";
 import { AUTHORIZION, TOKEN } from "./Constants/constant";
 import History from "./Constants/History";
 import { Link } from "react-router-dom";
@@ -14,27 +13,12 @@ class Navbar extends Component {
     }
     return (
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>
-            Sign-in
-          </Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <Link className="navbar-brand" to={"/sign-in"}>Sign-In</Link>
             <ul className="navbar-nav ml-auto">
               <li className="navbar-brand">
-                {localStorage.getItem(AUTHORIZION) && (
-                  <a onClick={logOut}>Logout</a>
-                )}
-              </li>
-              <li className="nav-item">
-                {!localStorage.getItem(AUTHORIZION) && (
-                  <Link className="nav-link" to={"/sign-up"}>
-                    <a>Sign up</a>
-                  </Link>
-                )}
+                {localStorage.getItem(AUTHORIZION) && (<a onClick={logOut}>Logout</a>)}
               </li>
             </ul>
-          </div>
-        </div>
       </nav>
     );
   }

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import Histroy from "./Constants/History";
 import axios from "axios";
+import  "../register.css";
 
 export default class Register extends Component {
   state = {
@@ -29,7 +28,6 @@ export default class Register extends Component {
       email: email,
       password: password,
     };
-    console.log("ggggggggg");
     let url = "https://gowtham-rest-api-crud.herokuapp.com/register";
     axios.post(url, data).then(
       (res) => {
@@ -47,49 +45,16 @@ export default class Register extends Component {
   render() {
     return (
       <div className="auth-wrapper">
-        <div className="auth-inner">
+        <div className="col">
           <MuiThemeProvider>
             <h3>Sign Up</h3>
-            <TextField
-              hintText="Enter your Username"
-              floatingLabelText="Username"
-              id="name"
-              name="name"
-              required
-              autoFocus="true"
-              value={this.state.name}
-              onChange={this.onChange}
-            />
-            <br />
-            <TextField
-              hintText="Enter your Email"
-              floatingLabelText="Email"
-              id="Email"
-              name="email"
-              required
-              autoFocus="true"
-              value={this.state.email}
-              onChange={this.onChange}
-            />
-            <br />
-            <TextField
-              type="password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              id="password"
-              name="password"
-              required
-              autoFocus="true"
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-            <br />
-            <RaisedButton
-              label="Register"
-              primary={true}
-              onClick={this.onSubmit}
-            />
-            <Link to="/sign-in"> Sign-in</Link>
+                <TextField floatingLabelText="Username" id="name" name="name" value={this.state.name} onChange={this.onChange}/><br/>
+                <TextField floatingLabelText="Email" id="Email" name="email" value={this.state.email} onChange={this.onChange}/><br/>
+                <TextField type="password" floatingLabelText="Password" id="password" name="password" value={this.state.password} onChange={this.onChange}/><br/>
+            <div className = "but">
+                <button type="button" class="btn btn-primary" onClick={this.onSubmit}> Register </button>
+                <Link to="/sign-in"> Sign-in</Link>
+            </div>
           </MuiThemeProvider>
         </div>
       </div>
