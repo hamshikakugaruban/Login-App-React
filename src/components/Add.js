@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import {Container, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Label, Input, Button } from "reactstrap";
 import "../App.css";
 import axios from "axios";
 import { TOKEN } from "./Constants/constant";
-import { Modal } from "antd";
+import "../register.css"
 
 class Add extends Component {
   state = {
@@ -14,7 +14,6 @@ class Add extends Component {
     location: "",
     visible: false,
     type: "add",
-    editData: {},
   };
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -29,20 +28,6 @@ class Add extends Component {
         type: nextProps.edit.type,
       });
   }
-
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  handleOk = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  };
-
   handleCancel = (e) => {
     console.log(e);
     this.setState({
@@ -63,6 +48,7 @@ class Add extends Component {
       [name]: value,
     });
   };
+  
   onSubmit = (e) => {
     const { name, email, emp_id, location, type, id } = this.state;
     let config = {
@@ -80,11 +66,7 @@ class Add extends Component {
       console.log(data);
 
       axios
-        .post(
-          "https://gowtham-rest-api-crud.herokuapp.com/employees",
-          data,
-          config
-        )
+        .post("https://gowtham-rest-api-crud.herokuapp.com/employees",data, config)
         .then((res) => {
           console.log(res);
           this.setState({
@@ -105,17 +87,12 @@ class Add extends Component {
         email: email,
         emp_id: emp_id,
         location: location,
-        // company: "auxenta",
-        // phone: "457",
+        company: "auxenta",
+        phone: "457",
       };
       console.log(data);
-
       axios
-        .put(
-          `https://gowtham-rest-api-crud.herokuapp.com/employees/${id}`,
-          data,
-          config
-        )
+        .put(`https://gowtham-rest-api-crud.herokuapp.com/employees/${id}`, data, config)
         .then((res) => {
           console.log(res);
           this.setState({
@@ -137,43 +114,25 @@ class Add extends Component {
     const { name, email, emp_id, location, type } = this.state;
     return (
       <>
-        <button type="button" class="btn btn-primary" onClick={this.showModal}>
-          Add Employee
-        </button>
-        <Modal title={false} visible={this.state.visible} footer={false} handleCancel={this.handleCancel}>
-          <Container className="App">
-            <h2>{type === "add" ? "Add-Employee" : ""}</h2>
-            <Form className="form">
-              <Col>
-                <FormGroup>
+        <div className="auth-wrapper">
+        <div className="add">
+            <h3>{type === "add" ? "Add-Employee" : ""}</h3>
+            <form className="form">
                   <Label>Name</Label>
-                  <Input type="text" name="name" id="name" value={name} onChange={this.onChange} placeholder="Enter ur Name"/>
-                </FormGroup>
-              </Col>
-              <Col>
-                <FormGroup>
-                  <Label>Emp_id</Label>
-                  <Input type="number" name="emp_id" id="emp_id" placeholder="Enter ur emp_id" value={emp_id} onChange={this.onChange}/>
-                </FormGroup>
-              </Col>
-              <Col>
-                <FormGroup>
+                  <Input type="text" name="name" id="name" value={name} onChange={this.onChange} placeholder="Enter ur Name"/><br/>
                   <Label>Email</Label>
-                  <Input type="email" name="email" id="email" placeholder="Enter ur Email" value={email} onChange={this.onChange}/>
-                </FormGroup>
-              </Col>
-              <Col>
-                <FormGroup>
+                  <Input type="email" name="email" id="email" placeholder="Enter ur Email" value={email} onChange={this.onChange}/><br/>
+                  <Label>Emp_id</Label>
+                  <Input type="number" name="emp_id" id="emp_id" placeholder="Enter ur emp_id" value={emp_id} onChange={this.onChange}/><br/>
                   <Label>Address</Label>
-                  <Input type="location" name="location" id="location" placeholder="Enter ur Address" value={location} onChange={this.onChange}/>
-                </FormGroup>
-              </Col>
-              <Button onClick={this.onSubmit}>Submit</Button>
+                  <Input type="location" name="location" id="location" placeholder="Enter ur Address" value={location} onChange={this.onChange}/><br/>
+                  <br/>
+              <Button className = "btn btn-success" onClick={this.onSubmit}>Submit</Button>
                &nbsp;
-              <Button  onClick={this.handleCancel}>Cancel</Button>
-            </Form>
-          </Container>
-        </Modal>
+              <Button className="btn btn-danger" onClick={this.handleCancel}>Cancel</Button>
+            </form>
+            </div>
+            </div>
       </>
     );
   }

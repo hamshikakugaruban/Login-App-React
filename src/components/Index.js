@@ -49,12 +49,14 @@ export default class Index extends Component {
       editStatus: false,
     });
   };
+
   updateEditMode = () => {
     this.setState({
       editData: {},
     });
     this.getAllEmployee();
   };
+
   delete = (id) => {
     let config = {
       headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
@@ -83,9 +85,9 @@ export default class Index extends Component {
         key: "email",
       },
       {
-        title: "Emp_id",
+        title: "Emp_Id",
         dataIndex: "emp_id",
-        key: "address",
+        key: "emp_id",
       },
       {
         title: "Address",
@@ -109,27 +111,13 @@ export default class Index extends Component {
 
     return (
       <div>
-        <Navbar />
-        <div id="wrapper" style={{ width: "100%", marginTop: "60px" }}>
-          <div id="content-wrapper">
-            <div className="container-fluid">
-              <ol className="breadcrumb">
-                <li className="ml-auto">
-                  <Add
-                    edit={editData}
-                    reload={this.getAllEmployee}
-                    reSet={this.updateEditMode}
-                  />
-                </li>
-              </ol>
-              <div>
+        <Navbar/>
+            <Add edit={editData} reload={this.getAllEmployee} reSet={this.updateEditMode}/>
+              <h3>
                   &nbsp;&nbsp;Employees List
                   <Table columns={columns} dataSource={employees} />
-                </div>
-              </div>
-            </div>
-          </div>
-         </div>
+              </h3>
+      </div>
     );
   }
 }
